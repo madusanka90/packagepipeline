@@ -6,7 +6,7 @@ pipeline {
                 sh 'mvn clean package'
             }
             post {
-                sucsess {
+                success {
                     echo 'Now Archiving...'
                     archiveArtifacts artifacts: '**/target/*.war'
                 } 
