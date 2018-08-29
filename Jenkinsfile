@@ -26,10 +26,9 @@ pipeline {
                 } 
             }
         }
-
         stage ('Deploy to Staging'){
             steps{
-                build job: 'pipeline_deploy_to_stg'
+                build job: 'deploy_to_stage'
             }
         }
     }
