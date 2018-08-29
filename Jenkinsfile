@@ -26,9 +26,29 @@ pipeline {
                 } 
             }
         }
+
         stage ('Deploy to Staging'){
-            steps{
+            steps {
                 build job: 'pipeline_deploy_to_stg'
+            }
+        }
+
+        stage('Deploy to Production'){
+            steps {
+                timeout(time:5, unit:'DAYS'){
+                    input message:'Approve Production Deployment?'
+                }
+
+                build job: 'pipeline_deploy_to_prod'
+            }
+            post {
+                success {
+                    echo 'Release deployed to production'
+                }
+                
+                failure {
+                    echo 'Production Release Failed'
+                }
             }
         }
     }
